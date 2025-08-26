@@ -2,6 +2,9 @@
 
 # Copilot Instructions for Azure App Service AI Demo
 
+## Model Preference
+**Preferred Model**: Claude Sonnet 4 - Use this model for all interactions with this workspace for optimal performance with complex Azure architecture, Python Flask development, and AI service integrations.
+
 This is a Python Flask web application designed to run on Azure App Service with the following key features:
 
 ## Project Structure
@@ -22,6 +25,7 @@ This is a Python Flask web application designed to run on Azure App Service with
 - Implement proper error handling for authentication flows
 - Keep sensitive configuration in environment variables
 - Use async/await patterns for API calls in JavaScript
+- **Code Attribution**: Always include a comment at the top of any generated code files indicating the AI model used for generation (e.g., `# Generated with Claude Sonnet 4` for Python files, `// Generated with Claude Sonnet 4` for JavaScript files, `<!-- Generated with Claude Sonnet 4 -->` for HTML files)
 
 ## Azure Integration
 - Configured for Azure App Service deployment
