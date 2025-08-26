@@ -160,23 +160,31 @@ Navigate to `http://localhost:5000` and experience the financial analyst simulat
 
 ```
 DemoAppServiceAi/
-├── app.py                     # Main Flask application with RAG implementation
-├── requirements.txt           # Python dependencies
-├── runtime.txt               # Python version specification
-├── Procfile                  # Azure App Service startup configuration
-├── .env.example              # Environment variables template
-├── .env                      # Local environment configuration (not in git)
-├── templates/                # Jinja2 HTML templates
-│   ├── index.html            # Main application interface
-│   ├── login.html            # Authentication page with corporate branding
-│   └── auth_error.html       # Error handling page
-├── static/                   # Static web assets
-├── .github/
-│   └── copilot-instructions.md # Development guidelines
-├── .vscode/
-│   └── tasks.json            # VS Code task configurations
-└── __pycache__/              # Python bytecode cache
+├── app.py                         # Main Flask application with RAG & SK integration
+├── env.ps1                        # PowerShell helper to load .env (resolves $env:VAR placeholders)
+├── .env.example                   # Environment variables template (do not commit secrets)
+├── .env                           # Local environment config (ignored by git; optional)
+├── azure-setup.ps1                # Setup script for Azure resources (documentation + azure cli snippets)
+├── Procfile                       # Azure App Service startup configuration
+├── requirements.txt               # Python dependencies
+├── requirements_sk.txt            # Semantic Kernel specific dependencies
+├── runtime.txt                    # Python runtime specification
+├── semantic_kernel_integration.py # Semantic Kernel integration helpers (placeholder/extension)
+├── semantic_kernel_service.py     # Semantic Kernel service implementation
+├── final_test.py                  # Local testing script
+├── templates/                     # Jinja2 HTML templates (index, login, auth_error)
+│   ├── index.html
+│   ├── login.html
+│   └── auth_error.html
+├── __azurite_db_queue__.json      # Azurite emulator storage (local, not tracked)
+├── __azurite_db_queue_extent__.json
+└── __queuestorage__/              # Azurite queue storage files (local, not tracked)
 ```
+
+> Notes:
+> - `.env` is intentionally a local file and is included in `.gitignore`. Use `.env.example` as a template.
+> - To load local environment variables into PowerShell (including expanding `$env:VARIABLE` references), dot-source `env.ps1` from the project root:
+>   `. .\env.ps1`
 
 ## 🧠 Dual Architecture System
 
