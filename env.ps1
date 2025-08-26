@@ -11,11 +11,22 @@ if (Test-Path $envFile) {
             if ($pair.Length -eq 2) {
                 $name = $pair[0].Trim()
                 $value = $pair[1].Trim()
+
+                # Expand PowerShell env variable syntax in the value (e.g., $env:USERNAME)
+                $valueToSet = $value
+                if ($value -match '^\$env:(.+)$') {
+                    $envName = $matches[1]
+                    $expanded = [Environment]::GetEnvironmentVariable($envName)
+                    if ($null -ne $expanded) {
+                        $valueToSet = $expanded
+                    }
+                }
+
                 # Set as environment variable for this process
-                [System.Environment]::SetEnvironmentVariable($name, $value, 'Process')
+                [System.Environment]::SetEnvironmentVariable($name, $valueToSet, 'Process')
                 # Also set a PowerShell variable (lowercased) for convenience: e.g., $local_user
                 $psVarName = $name.ToLower().Replace('-', '_')
-                Set-Variable -Name $psVarName -Value $value -Scope Global -ErrorAction SilentlyContinue
+                Set-Variable -Name $psVarName -Value $valueToSet -Scope Global -ErrorAction SilentlyContinue
             }
         }
     }
