@@ -110,6 +110,7 @@ pip install -r requirements.txt
 - Create an Azure AI Search service
 - Index your documents with the name: `azureblob-index`
 - Note the service endpoint and admin key
+- Sample docs: if present, upload the files in the `docs/` directory to your Azure Blob storage container and configure the search index to crawl that container (or use the Azure Portal "Import data" wizard). This helps you populate `azureblob-index` with sample content for development and testing.
 
 #### Azure OpenAI Setup
 - Deploy a GPT-3.5-Turbo model in Azure OpenAI
@@ -160,6 +161,7 @@ Navigate to `http://localhost:5000` and experience the financial analyst simulat
 
 ```
 DemoAppServiceAi/
+├── docs/                         # Optional sample documents for upload to blob storage and indexing
 ├── app.py                         # Main Flask application with RAG & SK integration
 ├── env.ps1                        # PowerShell helper to load .env (resolves $env:VAR placeholders)
 ├── .env.example                   # Environment variables template (do not commit secrets)
@@ -184,7 +186,7 @@ DemoAppServiceAi/
 > Notes:
 > - `.env` is intentionally a local file and is included in `.gitignore`. Use `.env.example` as a template.
 > - To load local environment variables into PowerShell (including expanding `$env:VARIABLE` references), dot-source `env.ps1` from the project root:
->   `. .\env.ps1`
+>   `. .\\env.ps1`
 
 ## 🧠 Dual Architecture System
 
