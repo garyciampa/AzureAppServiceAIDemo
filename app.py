@@ -104,6 +104,13 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', str(uuid.uuid4()))
+app.config['COMPANY_URL'] = os.environ.get('COMPANY_URL', 'https://www.novatech-demo.test/')
+
+@app.context_processor
+def inject_company_url():
+    """Inject COMPANY_URL into all templates so external links can be managed from configuration or env var."""
+    from flask import current_app
+    return dict(COMPANY_URL=current_app.config.get('COMPANY_URL'))
 
 # Azure AD Configuration
 CLIENT_ID = os.environ.get('AZURE_CLIENT_ID', '')
